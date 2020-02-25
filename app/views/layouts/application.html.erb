@@ -16,9 +16,9 @@
               <a class="navbar-brand" href="/foods">Health & Muscle delivery</a>
             </div>
               <% if cock_signed_in? %>
-                <%= link_to "ログアウト", destroy_cock_session_path, method: :delete %>
+                <%= link_to "コックログアウト", destroy_cock_session_path, method: :delete %>
                 <%= link_to "メニューの追加", new_food_path  %>
-                <%= link_to "マイページ", cock_path(current_cock.id)  %>
+                <%= link_to "コックマイページ", cock_path(current_cock.id)  %>
               <% end %>
 
               <% if user_signed_in? %>
