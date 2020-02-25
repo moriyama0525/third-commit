@@ -1,0 +1,21 @@
+<% if flash[:notice] %>
+    <div class="alert alert-danger"><%= flash[:notice] %></div>
+<% end %>
+<h1>メニューを追加する</h1>
+<%= form_for @food do |f| %>
+    <p>
+    <%= f.label :image, "画像をアップロード" %>
+    <%= f.file_field :image %>
+    </p>
+    <p>
+    <%= f.label :title, "メニューの名前" %><br>
+    <%= f.text_field :title%>
+    </p>
+    <br>
+    <p>
+    <%= f.label :content, "メニューの説明" %><br>
+    <%= f.text_area :content %>
+    </p>
+    <br>
+    <%= f.submit "追加する", class: "btn btn-primary" %>
+<% end %>

@@ -1,0 +1,24 @@
+<% if flash[:notice] %>
+    <div class="alert alert-success"><%= flash[:notice] %></div>
+<% end %>
+<h1>トップページ</h1>
+<div class="row">
+  <% @foods.each do |food| %>
+  <div class="col-sm-6 col-md-4">
+    <div style="height: 450px;">
+      <div class="card">
+        <%= image_tag(food.image , :class => "responsive-img", :height => "250") unless food.image.blank?%>
+        <div class="caption container">
+          <h4><%= truncate(food.title, length: 15) %></h4>
+          <p><%= truncate(food.content, length: 60) %></p>
+          <p><%= link_to "商品詳細", "/store/#{food.id}", class: "btn btn-primary" %> <%= link_to "編集", edit_food_path(food), class: "btn btn-primary" %> <%= link_to "削除", food, class: "btn btn-primary", method: :delete %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+<div class="mx-auto" style="width: 200px;">
+  <%= paginate @foods %>
+</div>

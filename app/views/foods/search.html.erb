@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <% @search_foods.each do |food| %>
+    <div class="col-sm-6 col-md-4">
+      <div class="h-100">
+        <div class="card">
+          <img src="..." alt="...">
+          <div class="caption">
+            <h4><%= food.title %></h4>
+            <p><%= food.content %></p>
+            <p><%= link_to "商品詳細", "/store/#{food.id}", class: "btn btn-primary" %> <%= link_to "編集", edit_food_path(food), class: "btn btn-primary" %> <%= link_to "削除", food, class: "btn btn-primary", method: :delete %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

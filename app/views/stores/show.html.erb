@@ -1,0 +1,6 @@
+<h1>商品詳細ページ</h1>
+<h4><%= @food.title %></h4>
+<p><%= @food.content %></p>
+<%= form_for @store, url: "/store/#{@food.id}", html: {method: :post} do |s| %>
+    <%= s.submit "購入する", class: "btn btn-primary" %>
+<% end %>
