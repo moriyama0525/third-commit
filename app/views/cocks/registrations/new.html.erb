@@ -1,6 +1,6 @@
 <h2>新規コック登録</h2>
-<form>
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <form>
     <%= render "devise/shared/error_messages", resource: resource %>
     <div class="form-group">
       <%= f.label :nickname, "ニックネーム" %><br />
@@ -24,7 +24,7 @@
     <div class="actions">
       <%= f.submit "新規登録",class: "btn btn-outline-dark" %>
     </div>
-  <% end %>
-</form>
+  </form>
+<% end %>
 
 <%= render "cocks/shared/links" %>
