@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   end
 
   resources :foods, expect: :show
-  root to: "foods#index"
+  root to: "foods#toppage"
   get "/toppage", to:"foods#toppage"
   resources :users, only: :show
   get "/store/:id", to: "stores#show"
