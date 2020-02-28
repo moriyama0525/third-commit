@@ -1,6 +1,33 @@
 <h1>商品詳細ページ</h1>
+<%= image_tag(@food.image , :class => "responsive-img", :height => "600") unless @food.image.blank?%>
 <h4><%= @food.title %></h4>
+<p>コック：<%= @food.cock.nickname %></p>
+<h3>商品詳細</h3>
 <p><%= @food.content %></p>
-<%= form_for @store, url: "/store/#{@food.id}", html: {method: :post} do |s| %>
+
+<% if user_signed_in? and !(cock_signed_in?) %>
+  <%= form_for @store, url: "/store/#{@food.id}", html: {method: :post} do |s| %>
+    <%= s.hidden_field :cock_id, :value => @food.cock_id %>
     <%= s.submit "購入する", class: "btn btn-primary" %>
+  <% end %>
+
+  <div class="p-comment__formBox">
+    <%= form_for @comment do |f| %>
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+      <%= f.hidden_field :food_id %>
+      <%= f.hidden_field :cock_id, :value => @food.cock_id %>
+      <div class="form-group">
+        <%= f.label :comment, 'コメントを記入(投稿すると名前も表示されます)' %>
+        <%= f.text_area :comment, class: 'form-control', rows: 4 %>
+      </div>
+      <%= f.submit '送信', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+<% elsif !(cock_signed_in?) and !(user_signed_in?) %>
+  <p class="font-weight-bold">購入するには、先にユーザーログインまたはユーザー登録を完了してください</p>
 <% end %>
+
+<div class="p-comment__list">
+  <div class="p-comment_listTitle">コメント</div>
+  <%= render @food.comments %>
+</div>

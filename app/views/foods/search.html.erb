@@ -1,18 +1,23 @@
-<div class="container">
-  <div class="row">
-    <% @search_foods.each do |food| %>
-    <div class="col-sm-6 col-md-4">
-      <div class="h-100">
-        <div class="card">
-          <img src="..." alt="...">
-          <div class="caption">
-            <h4><%= food.title %></h4>
-            <p><%= food.content %></p>
-            <p><%= link_to "商品詳細", "/store/#{food.id}", class: "btn btn-primary" %> <%= link_to "編集", edit_food_path(food), class: "btn btn-primary" %> <%= link_to "削除", food, class: "btn btn-primary", method: :delete %></p>
-          </div>
+<div class="row">
+  <% @search_foods.each do |food| %>
+  <div class="col-sm-6 col-md-4">
+    <div style="height: 450px;">
+      <div class="card">
+        <%= image_tag(food.image , :class => "responsive-img", :height => "250") unless food.image.blank?%>
+        <div class="caption container">
+          <h4><%= truncate(food.title, length: 15) %></h4>
+          <em>コック：<%= food.cock.nickname %></em>
+          <p><%= truncate(food.content, length: 60) %></p>
+          <p></p>
+          <p><% if (cock_signed_in?) and (!user_signed_in?) and (food.cock_id == current_cock.id) %>
+               <%= link_to "編集", edit_food_path(food), class: "btn btn-primary" %> <%= link_to "削除", food, class: "btn btn-primary", method: :delete %>
+             <% elsif !(cock_signed_in?) %>
+               <%= link_to "商品詳細", "/store/#{food.id}", class: "btn btn-primary" %>
+             <% end %>
+          </p>
         </div>
       </div>
     </div>
-    <% end %>
   </div>
+  <% end %>
 </div>

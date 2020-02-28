@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :stores, dependent: :delete_all
   has_many :foods, through: :stores
+  
+  has_many :comments, dependent: :delete_all
+  has_many :foods, through: :comments
 
   include JpPrefecture
   jp_prefecture :prefecture_code

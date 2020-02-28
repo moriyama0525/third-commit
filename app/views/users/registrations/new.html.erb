@@ -1,59 +1,50 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :postcode %><em>(ハイフンは不要)</em><br />
-    <%= f.text_field :postcode, autofocus: true, autocomplete: "postcode", maxlength: "7" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :prefecture_code, collection: JpPrefecture::Prefecture.all, :value_method => :name, include_blank: '都道府県' %><br />
-    <%= f.text_field :prefecture_code, autofocus: true, autocomplete: "prefecture_code" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :address_city %><br />
-    <%= f.text_field :address_city, autofocus: true, autocomplete: "address_city" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :address_street %><br />
-    <%= f.text_field :address_street, autofocus: true, autocomplete: "address_street" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :address_building %><br />
-    <%= f.text_field :address_building, autofocus: true, autocomplete: "address_building" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %>文字以上)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+<h2>ユーザー新規登録</h2>
+<form>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="form-group">
+      <%= f.label :name %><br />
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :postcode %><em>(ハイフンは不要)</em><br />
+      <%= f.text_field :postcode, autofocus: true, autocomplete: "postcode", maxlength: "7", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :prefecture_code, collection: JpPrefecture::Prefecture.all, :value_method => :name, include_blank: '都道府県' %><br />
+      <%= f.text_field :prefecture_code, autofocus: true, autocomplete: "prefecture_code", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :address_city %><br />
+      <%= f.text_field :address_city, autofocus: true, autocomplete: "address_city", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :address_street %><br />
+      <%= f.text_field :address_street, autofocus: true, autocomplete: "address_street", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :address_building %><br />
+      <%= f.text_field :address_building, autofocus: true, autocomplete: "address_building", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %>文字以上)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+    </div>
+    <div class="actions">
+      <%= f.submit "新規登録",class: "btn btn-outline-dark" %>
+    </div>
+  <% end %>
+</form>
 
 <%= render "devise/shared/links" %>

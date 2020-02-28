@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>App</title>
+    <title>Health & Muscle Delivery</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -15,18 +15,20 @@
             <div class="navbar-header">
               <a class="navbar-brand" href="/foods">Health & Muscle delivery</a>
             </div>
-              <% if cock_signed_in? %>
-                <%= link_to "コックログアウト", destroy_cock_session_path, method: :delete %>
-                <%= link_to "メニューの追加", new_food_path  %>
-                <%= link_to "コックマイページ", cock_path(current_cock.id)  %>
+              <% if cock_signed_in? and !(user_signed_in?) %>
+                <%= link_to "コックログアウト", destroy_cock_session_path, method: :delete, class:"navber-link" %>
+                <%= link_to "メニューの追加", new_food_path, class:"navber-link" %>
+                <%= link_to "コックマイページ", cock_path(current_cock.id), class:"navber-link"  %>
               <% end %>
 
-              <% if user_signed_in? %>
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-                <%= link_to "マイページ", user_path(current_user.id)  %>
-              <% else %>
-                <%= link_to "ログイン", new_user_session_path, class: "post" %>
-                <%= link_to "新規登録", new_user_registration_path, class: "post" %>
+              <% if user_signed_in? and !(cock_signed_in?) %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"navber-link" %>
+                <%= link_to "ユーザーマイページ", user_path(current_user.id), class:"navber-link"  %>
+                <%= link_to "コックの方はこちら", "/toppage", class:"navber-link"  %>
+              <% elsif !(user_signed_in?) and !(cock_signed_in?) %>
+                <%= link_to "ユーザーログイン", new_user_session_path, class: "post navber-link" %>
+                <%= link_to "ユーザー新規登録", new_user_registration_path, class: "post navber-link" %>
+                <%= link_to "コックの方はこちら", "/toppage", class:"navber-link"  %>
               <% end %>
               <dl class="searchbox">
                 <%= search_form_for @search, url: "/search" do |f| %>
@@ -36,6 +38,18 @@
               </dl>
         </div>
       </nav>
+      <% if flash[:notice] %>
+        <div class="alert alert-success"><%= flash[:notice] %></div>
+      <% end %>
+      <% if flash[:error_message] %>
+        <div class="alert alert-warning">
+          <ul>
+            <% flash[:error_message].each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
     <div class="container">
       <%= yield %>
     </div>

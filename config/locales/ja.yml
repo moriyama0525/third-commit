@@ -64,7 +64,7 @@ ja:
       too_long: "は%{count}文字以下に設定して下さい。"
       invalid: "は有効でありません。"
       confirmation: "が内容とあっていません。"
-      
+
   views:
     pagination:
       first: "最初"
@@ -74,11 +74,18 @@ ja:
       truncate: "..."
 
   activerecord:
+    attributes:
+      food:
+        title: "商品名"
+        content: "商品紹介"
+      comment:
+        comment: "コメント"
     models:
       user: "ユーザー"
       food: "商品"
-      active_admin: "管理者"
+      admin_user: "管理者"
       comment: "コメント"
+      cock: "コック"
     attributes:
       user:
         name: "名前"

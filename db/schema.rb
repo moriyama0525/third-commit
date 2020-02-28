@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200225121044) do
+ActiveRecord::Schema.define(version: 20200227120932) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "namespace"
@@ -46,8 +46,19 @@ ActiveRecord::Schema.define(version: 20200225121044) do
     t.datetime "remember_created_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "nickname"
     t.index ["email"], name: "index_cocks_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_cocks_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "food_id"
+    t.integer  "user_id"
+    t.text     "comment",    limit: 65535, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["food_id"], name: "index_comments_on_food_id", using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
   create_table "food_user_relations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -68,11 +79,22 @@ ActiveRecord::Schema.define(version: 20200225121044) do
     t.integer  "cock_id"
   end
 
+  create_table "rating_caches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "cacheable_type"
+    t.integer  "cacheable_id"
+    t.float    "avg",            limit: 24, null: false
+    t.integer  "qty",                       null: false
+    t.string   "dimension"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "stores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "food_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "cock_id",    null: false
     t.index ["food_id"], name: "index_stores_on_food_id", using: :btree
     t.index ["user_id"], name: "index_stores_on_user_id", using: :btree
   end
@@ -95,6 +117,8 @@ ActiveRecord::Schema.define(version: 20200225121044) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "comments", "foods"
+  add_foreign_key "comments", "users"
   add_foreign_key "food_user_relations", "foods"
   add_foreign_key "food_user_relations", "users"
   add_foreign_key "stores", "foods"

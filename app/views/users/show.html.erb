@@ -1,4 +1,23 @@
-<h1>ユーザーマイページ、購入商品一覧</h1>
-<% @store.each do |store| %>
-  <div><%= store.food.title %></div>
-<% end %>
+<h2>発送待ちの商品一覧</h2>
+<div class="row">
+  <% @stores.each do |store| %>
+  <div class="col-sm-6 col-md-4">
+    <div style="height: 450px;">
+      <div class="card">
+        <%= image_tag(store.food.image , :class => "responsive-img", :height => "250") unless store.food.image.blank?%>
+        <div class="caption container">
+          <h4><%= truncate(store.food.title, length: 15) %></h4>
+          <em>コック：<%= store.food.cock.nickname %></em>
+          <p><%= truncate(store.food.content, length: 60) %></p>
+          <p><% if (cock_signed_in?) and (!user_signed_in?) and (store.food.cock_id == current_cock.id) %>
+               <%= link_to "編集", edit_food_path(food), class: "btn btn-primary" %> <%= link_to "削除", food, class: "btn btn-primary", method: :delete %>
+             <% elsif !(cock_signed_in?) %>
+               <%= link_to "商品詳細", "/store/#{store.food.id}", class: "btn btn-primary" %>
+             <% end %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

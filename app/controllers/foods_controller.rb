@@ -8,7 +8,7 @@ class FoodsController < ApplicationController
     end
 
     def create
-        food = Food.new(food_params, cock_id: current_cock.id)
+        food = Food.new(food_params)
         if food.save
             flash[:notice] = "「#{food.title}」を追加しました"
             redirect_to foods_path
@@ -48,6 +48,6 @@ class FoodsController < ApplicationController
 
     private
     def food_params
-        params.require(:food).permit(:image, :title, :content)
+        params.require(:food).permit(:image, :title, :content, :cock_id)
     end
 end

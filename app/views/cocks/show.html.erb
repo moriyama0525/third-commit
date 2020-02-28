@@ -1,4 +1,5 @@
 <h1>コック マイページ</h1>
+<%= link_to "新規注文確認", orders_path,class: "btn btn-primary" %>
 <p>掲載中の商品</p>
 <div class="row">
   <% @foods.each do |food| %>
@@ -9,7 +10,7 @@
         <div class="caption container">
           <h4><%= truncate(food.title, length: 15) %></h4>
           <p><%= truncate(food.content, length: 60) %></p>
-          <p><%= link_to "商品詳細", "/store/#{food.id}", class: "btn btn-primary" %> <%= link_to "編集", edit_food_path(food), class: "btn btn-primary" %> <%= link_to "削除", food, class: "btn btn-primary", method: :delete %></p>
+          <p><%= link_to "編集", edit_food_path(food), class: "btn btn-primary" %> <%= link_to "削除", food, class: "btn btn-primary", method: :delete %></p>
         </div>
       </div>
     </div>

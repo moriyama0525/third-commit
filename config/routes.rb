@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     get "sign_out", :to => "cocks/sessions#destroy"
   end
 
-  resources :foods
+  resources :foods, expect: :show
   root to: "foods#index"
   get "/toppage", to:"foods#toppage"
   resources :users, only: :show
@@ -30,5 +30,7 @@ Rails.application.routes.draw do
   post "/store/:id", to: "stores#create"
   get "/search", to: "foods#search"
   resources :cocks, only: :show
+  resources :comments, only: %i[create destroy]
+  resources :orders, only: %i[index create destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

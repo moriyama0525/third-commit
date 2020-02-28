@@ -1,8 +1,16 @@
-<h1>トップページ</h1>
-<% if cock_signed_in? %>
-  <%= link_to "コック専用ログアウト", destroy_cock_session_path, method: :delete %>
-  <%= link_to '商品投稿画面へ', new_food_path %>
-<% else %>
-  <%= link_to "コック専用ログイン", new_cock_session_path, class: 'post' %>
-  <%= link_to "コック専用新規登録", new_cock_registration_path, class: 'post' %>
-<% end %>
+<%= stylesheet_link_tag 'toppage' %>
+
+<div>
+  <p>
+  <% if user_signed_in? %>
+    <p>コックとしてアクセスするにはユーザーログアウトをしてください</p>
+  <% else %>
+    <% if cock_signed_in? %>
+      <span class="login-block-left"><%= link_to "コック専用ログアウト", destroy_cock_session_path, method: :delete, class:"btn btn-primary btn-lg" %></span>
+      <span class="login-block-right"><%= link_to '商品投稿画面へ', new_food_path, class:"btn btn-primary btn-lg" %></span>
+    <% else %>
+      <span class="login-block-left"><%= link_to "コック専用ログイン", new_cock_session_path, class: 'post btn btn-primary btn-lg' %></span>
+      <span class="login-block-right"><%= link_to "コック専用新規登録", new_cock_registration_path, class: 'post btn btn-primary btn-lg' %></span>
+    <% end %>
+  <% end %>
+</div>
