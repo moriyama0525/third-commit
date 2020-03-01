@@ -134,7 +134,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.0)
     kaminari-core (1.2.0)
-    libv8 (7.3.492.27.1-x86_64-linux)
+    libv8 (7.3.492.27.1)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -166,7 +166,7 @@ GEM
       byebug (~> 11.0)
       pry (~> 0.10)
     public_suffix (4.0.3)
-    puma (3.12.2)
+    puma (3.12.3)
     rack (2.2.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -207,7 +207,6 @@ GEM
       activesupport (>= 5.0)
       i18n
       polyamorous (= 2.3.0)
-    ratyrate (1.2.2.alpha)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -291,12 +290,11 @@ DEPENDENCIES
   mini_racer
   mysql2 (>= 0.3.18, < 0.5)
   pry-byebug
-  puma (~> 3.0)
+  puma (~> 3.12)
   rails (~> 5.0.0, >= 5.0.0.1)
   rails-flog
   rails-i18n
   ransack
-  ratyrate
   rmagick
   sass-rails (~> 5.0)
   spring
